@@ -75,7 +75,10 @@ export class SiteService {
 
   // Retrieve Sites
   public getSites() : SiteArray {
-    return this._localStorageService.get("siteArray") as SiteArray;
+    if (this._localStorageService.get("siteArray")) {
+      return this._localStorageService.get("siteArray") as SiteArray;
+    }
+    return new SiteArray();
   }
 
   // Create Site form
