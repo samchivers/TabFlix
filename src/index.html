@@ -16,6 +16,16 @@
             <link href="styles.css"
                   rel="stylesheet"
                   type="text/css"/>
+            <script>
+            // See http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
+            (function(){
+                var redirect = sessionStorage.redirect;
+                delete sessionStorage.redirect;
+                if (redirect && redirect != location.href) {
+                    history.replaceState(null, null, redirect);
+                }
+            })();
+            </script>      
       </head>
       <body>
             <app-root></app-root>
