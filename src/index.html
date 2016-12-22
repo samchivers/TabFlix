@@ -1,52 +1,55 @@
 <!doctype html>
 <html>
-      <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>TabFlix</title>
-            <base href="/">
-            <link rel="icon" type="image/x-icon" href="favicon.ico">
-            <link rel="stylesheet" 
-                  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-                  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
-                  crossorigin="anonymous">
-            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-                  rel="stylesheet"
-                  type="text/css"/>
-            <link href="styles.css"
-                  rel="stylesheet"
-                  type="text/css"/>
-            <script>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" 
+            content="width=device-width, initial-scale=1">
+        <title>TabFlix</title>
+        <base href="/">
+        <link rel="icon" 
+            type="image/x-icon" 
+            href="favicon.ico">
+        <link rel="stylesheet" 
+            href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+            rel="stylesheet" 
+            type="text/css" />
+        <link href="styles.css" 
+            rel="stylesheet" 
+            type="text/css" />
+        <script>
             // See http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
-            (function(){
+            (function () {
                 var redirect = sessionStorage.redirect;
                 delete sessionStorage.redirect;
                 if (redirect && redirect != location.href) {
                     history.replaceState(null, null, redirect);
                 }
             })();
-            </script>      
-      </head>
-      <body>
-            <app-root></app-root>
-            <script src="//code.jquery.com/jquery-3.1.1.min.js"
-                  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-                  crossorigin="anonymous"></script>  
-            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
-                  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
-                  crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/3.0.2/screenfull.min.js"></script>
-            <script type="text/javascript">
-                if (screenfull.enabled) {
-                    document.addEventListener(screenfull.raw.fullscreenchange, () => {
-                        if (screenfull.isFullscreen == false){
-                            var frame = document.getElementById('tabflix-iframe');
-                            if (frame !== null){
-                                frame.parentNode.removeChild(frame);
-                            }
+        </script>
+    </head>
+    <body>
+        <app-root></app-root>
+        <script src="//code.jquery.com/jquery-3.1.1.min.js" 
+                integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 
+                crossorigin="anonymous"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/3.0.2/screenfull.min.js"></script>
+        <script type="text/javascript">
+            if (screenfull.enabled) {
+                document.addEventListener(screenfull.raw.fullscreenchange, () => {
+                    if (screenfull.isFullscreen == false) {
+                        var iframes = document.querySelectorAll('iframe');
+                        for (var i = 0; i < iframes.length; i++) {
+                            iframes[i].parentNode.removeChild(iframes[i]);
                         }
-                    });
-                }
-            </script>
-      </body>
+                    }
+                });
+            }
+        </script>
+    </body>
 </html>
