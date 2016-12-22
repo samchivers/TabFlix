@@ -1,0 +1,56 @@
+.btn-tabflix-green {
+    color:#fff;
+    background-color:#3c763d;
+}
+
+.input-group{
+    margin-top:10px;
+    margin-bottom:10px;
+    padding-left:0px;
+    padding-right:0px;
+}
+
+.tabflix-select-control {
+    border-radius: 0 !important;
+    -webkit-appearance: none !important;
+}
+
+.tabflix-site-form {
+    margin-bottom: 15px;
+}
+
+.tabflix-site-form-group .col-sm-12 {
+    padding-left:0px;
+}
+
+@media only screen and (min-width: 768px) {
+
+    .tabflix-site-form-group {
+        width: 55%;
+    }
+
+    .tabflix-site-form-group .input-group {
+        width: 100%;
+    }
+
+    .tabflix-site-form-group .input-group-addon {
+        width: 25px;
+    }
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .tabflix-site-form-group {
+        width: 65%;
+    }
+
+}
+
+@media only screen and (min-width: 1200px) {
+
+    .tabflix-site-form-group {
+        width: 70%;
+    }
+
+}

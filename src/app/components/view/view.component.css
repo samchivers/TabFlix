@@ -1,0 +1,24 @@
+.view-container {
+    margin-top:20px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    border-left-width: 5px;
+    border-left-color: #B9090B;    
+}
+
+.bs-callout {
+    padding: 20px;
+}
+
+h4 {
+    color:#B9090B;
+}
+
+.btn-tabflix-start {
+    background-color: #B9090B;
+    color: #000;
+    font-family: 'GraphiqueW01-Regular';
+    text-align: center;
+    font-size: 5rem;
+}

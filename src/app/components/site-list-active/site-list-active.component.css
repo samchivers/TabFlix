@@ -1,0 +1,20 @@
+.site-list-active-container {
+    margin-top:20px;
+    padding: 20px 20px 30px 20px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    border-left-width: 5px;
+    border-left-color: #ce4844;    
+}
+
+h4 {
+    color:#ce4844;
+}
+
+.btn-tabflix-red {
+    background-color: #ce4844;
+    color: #fff;
+    padding: 5px 8px 5px 8px;
+    margin: 5px auto;
+    border-radius: 2px;
+}

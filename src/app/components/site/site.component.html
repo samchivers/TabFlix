@@ -1,0 +1,34 @@
+<form class="form-inline tabflix-site-form" [formGroup]="form" (ngSubmit)="addSite()">
+  <div class="form-group tabflix-site-form-group">
+    <div class="col-sm-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="url-addon">https://</span>
+        <input type="text" 
+               class="form-control" 
+               id="inputURL" 
+               aria-describedby="url-addon" 
+               placeholder="e.g. www.github.com/samchivers/tabflix"
+               [formControlName]="'url'">
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12 noPadLeft">
+      <div class="input-group">
+        <span class="input-group-addon" id="time-addon"><i class="fa fa-clock-o" aria-hidden="true"></i></span>
+        <select class="form-control tabflix-select-control" 
+                name="timespan" 
+                id="timespan"
+                [formControlName]="'timespan'">
+          <option *ngFor="let ts of timespan">{{ ts.value }}</option>
+        </select>
+        <div class="input-group-addon">seconds</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12 noPadLeft">
+      <button class="btn btn-tabflix-green" type="submit"><i class="fa fa-plus"></i> Add Url</button>  
+    </div>
+  </div>
+</form>

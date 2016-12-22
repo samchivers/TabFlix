@@ -1,0 +1,24 @@
+<div class="container site-list-active-container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Active Urls</h4>
+      <p>A list of currently active URLs for TabFlix to cycle through.</p>
+      <table class="table table-striped table-responsive table-bordered">
+        <thead>
+          <tr>
+            <th>Url</th>
+            <th>Time</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let site of siteArray.siteArray">
+            <td>{{ site.url }}</td>
+            <td>10s</td>
+            <td><span class="btn-tabflix-red" (click)="removeSite(site)"><i class="fa fa-times"></i></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

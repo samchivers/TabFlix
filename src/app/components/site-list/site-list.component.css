@@ -1,0 +1,16 @@
+.site-list-container {
+    padding: 20px 20px 30px 20px;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    border-left-width: 5px;
+    border-left-color: #3c763d;    
+}
+
+h4 {
+    color:#3c763d;
+}
+
+.btn-tabflix-blue {
+    background-color: #1b809e;
+    color: #fff;
+}

@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'GraphiqueW01-Regular';
+    src: local('graphiquew01regular'), url('./assets/fonts/graphiquew01regular/graphiquew01regular.ttf');
+}
+
+.noPadLeft {
+    padding-left:0px !important;
+}

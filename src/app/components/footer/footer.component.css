@@ -1,0 +1,11 @@
+.footer {
+    margin: 10px auto 30px auto;
+    padding-left: 25%;
+    padding-right: 25%;
+    color: #ddd;
+    text-align: center;
+}
+
+.footer a {
+    color: #abd2ea;
+}
