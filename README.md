@@ -1,6 +1,6 @@
 # TabFlix
 
-Seemless looping through full-screen URLs 
+Seamless looping through full-screen URLs 
 
 ## What is TabFlix
 
