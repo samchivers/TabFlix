@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { SiteListComponent } from './components/site-list/site-list.component';
@@ -32,6 +32,7 @@ import { ToggleFullscreenDirective } from './directives/screenfull.directive';
     BrowserModule,
     FormsModule,
     HttpModule,
+    JsonpModule,
     ReactiveFormsModule,
     LocalStorageModule.withConfig({
       prefix: 'tabflix',
