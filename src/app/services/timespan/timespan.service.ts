@@ -10,9 +10,8 @@ export class TimespanService {
 
   // Construct an array of Timespans from 10 seconds
   // to 120 seconds
-  public constructTimespanArray() : Array<Timespan>
-  {
-    for (var i = 1; i <= 12; i++){
+  public constructTimespanArray(): Array<Timespan> {
+    for (let i = 1; i <= 12; i++) {
       this.TimespanArray.push(new Timespan(i, i * 10));
     }
     return this.TimespanArray;

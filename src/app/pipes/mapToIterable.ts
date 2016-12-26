@@ -5,9 +5,9 @@ import {Pipe} from '@angular/core';
 })
 export class MapToIterable {
     transform(map: {}, args: any[] = null): any {
-        if (!map)
+        if (! map) {
             return null;
-        return Object.keys(map)
-            .map((key) => ({ 'key': key, 'value': map[key] }));
+        }
+        return Object.keys(map).map((key) => ({ 'key': key, 'value': map[key] }));
     }
 }

@@ -11,7 +11,7 @@ import { Site } from '../../models/site.model';
 export class SiteListActiveComponent implements OnInit {
 
   // Object to hold array of Sites
-  public siteArray : SiteArray;
+  public siteArray: SiteArray;
 
   constructor(private _siteService: SiteService) { }
 
@@ -36,7 +36,7 @@ export class SiteListActiveComponent implements OnInit {
   }
 
   // Remove a given site from local storage
-  public removeSite(site){
+  public removeSite(site) {
     this._siteService.removeSite(site);
   }
 

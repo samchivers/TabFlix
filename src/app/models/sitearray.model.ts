@@ -4,9 +4,9 @@ import { Site } from './site.model';
 export class SiteArray {
     // Property to hold site arrays
     public siteArray: Array<Site>;
-    
+
     // Initialise property
-    constructor(){
+    constructor() {
         this.siteArray = new Array<Site>();
     }
 }

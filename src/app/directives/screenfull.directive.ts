@@ -7,7 +7,7 @@ const screenfull = require('screenfull');
 })
 export class ToggleFullscreenDirective {
 
-    constructor(private _siteService: SiteService){}
+    constructor(private _siteService: SiteService) {}
 
     @HostListener('click') onClick() {
         // Create iFrame for urls to sit in
