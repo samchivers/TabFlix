@@ -25,9 +25,9 @@ export class SiteService {
     constructor(private _formBuilder: FormBuilder,
         private _timespanService: TimespanService,
         private _localStorageService: LocalStorageService) {
-        this.siteAdded$ = new EventEmitter();
-        this.siteRemoved$ = new EventEmitter();
-        this.siteExists$ = new EventEmitter();
+        this.siteAdded$ = new EventEmitter<Site>();
+        this.siteRemoved$ = new EventEmitter<Site>();
+        this.siteExists$ = new EventEmitter<Site>();
     }
 
     // Save a new site

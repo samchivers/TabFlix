@@ -1,0 +1,7 @@
+{
+    "timespans": {
+        "min": 10,
+        "max": 120,
+        "increment": 10
+    }
+}

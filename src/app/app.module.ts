@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { Http, HttpModule, JsonpModule } from '@angular/http';
 
+import { AppConfig } from './app.config';
 import { AppComponent } from './app.component';
 import { SiteListComponent } from './components/site-list/site-list.component';
 import { SiteComponent } from './components/site/site.component';
@@ -16,6 +17,11 @@ import { LocalStorageModule } from 'angular-2-local-storage';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { ToggleFullscreenDirective } from './directives/screenfull.directive';
+
+// Load configuration settings up front
+export function appConfigFactory(config: AppConfig) {
+  return () => config.load();
+}
 
 @NgModule({
   declarations: [
@@ -42,8 +48,10 @@ import { ToggleFullscreenDirective } from './directives/screenfull.directive';
     BootstrapModalModule
   ],
   providers: [
+    AppConfig,
+    { provide: APP_INITIALIZER, useFactory: appConfigFactory, deps: [AppConfig], multi: true },
     SiteService,
-    TimespanService
+    TimespanService,
   ],
   bootstrap: [AppComponent]
 })
