@@ -1,3 +1,7 @@
+.btn {
+    border-radius: 0px;
+}
+
 .btn-tabflix-green {
     color:#fff;
     background-color:#3c763d;
@@ -8,6 +12,11 @@
     margin-bottom:10px;
     padding-left:0px;
     padding-right:0px;
+}
+
+.input-group-addon {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 .tabflix-select-control {
@@ -21,6 +30,14 @@
 
 .tabflix-site-form-group .col-sm-12 {
     padding-left:0px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948;
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442;
 }
 
 @media only screen and (min-width: 768px) {
