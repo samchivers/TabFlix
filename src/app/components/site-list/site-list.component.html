@@ -1,9 +1,18 @@
 <div class="container site-list-container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Add a Url</h4>
-      <p>Add an unlimited number of urls to the tab cycle.</p>
-      <app-site></app-site>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Add a Url</h4>
+            <p>Add an unlimited number of urls to the tab cycle.</p>
+            <div *ngIf="showGithubPagesWarning" class="alert alert-warning" role="alert">
+                <strong>Hey</strong>, it looks like you're using TabFlix on GitHub pages.
+                <br /><br />
+                If you need to use non-https addresses on TabFlix, you won't be able to via
+                GitHub pages due to GitHub's mixed content settings (see <a href="https://github.com/samchivers/tabflix/issues/5">this issue</a>).
+                <br /><br />
+                <strong>Good news</strong> though, you can download TabFlix and use it locally which will allow
+                http addresses (see instructions <a href="https://github.com/samchivers/tabflix/blob/master/README.md">here</a>)
+            </div>
+            <app-site></app-site>
+        </div>
     </div>
-  </div>
 </div>
