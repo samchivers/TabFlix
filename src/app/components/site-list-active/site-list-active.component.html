@@ -14,7 +14,7 @@
         <tbody>
           <tr *ngFor="let site of siteArray.siteArray">
             <td>{{ site.url }}</td>
-            <td>10s</td>
+            <td>{{ site.timespan }} seconds</td>
             <td><span class="btn-tabflix-red" (click)="removeSite(site)"><i class="fa fa-times"></i></span></td>
           </tr>
         </tbody>

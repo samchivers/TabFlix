@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SiteService } from '../../services/site/site.service';
+import { TimespanService } from '../../services/timespan/timespan.service';
 import { Modal } from 'angular2-modal/plugins/bootstrap/modal';
 import { Overlay } from 'angular2-modal';
 import { Site } from '../../models/site.model';
@@ -15,15 +16,20 @@ export class SiteComponent implements OnInit {
     // Site form
     public form: FormGroup;
 
+    // Array of possible Timespans
+    public timespanArray;
+
     constructor(private _siteService: SiteService,
-        public overlay: Overlay,
-        public vcRef: ViewContainerRef,
-        public modal: Modal) {
+                private _timespanService: TimespanService,
+                public overlay: Overlay,
+                public vcRef: ViewContainerRef,
+                public modal: Modal) {
         overlay.defaultViewContainer = vcRef;
     }
 
     ngOnInit() {
         this.buildAddSiteForm();
+        this.timespanArray = this._timespanService.constructTimespanArray();
         this._siteService.siteExists$.subscribe(site => this._onSiteExists(site));
     }
 
@@ -51,6 +57,7 @@ export class SiteComponent implements OnInit {
     // Build the dynamic form for adding new sites
     public buildAddSiteForm() {
         this.form = this._siteService.getSiteFormGroup();
+        console.log(this.form);
     }
 
 }

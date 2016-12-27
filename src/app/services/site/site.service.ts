@@ -88,7 +88,7 @@ export class SiteService {
         }
         return this._formBuilder.group({
             url: [site.url || '', Validators.required],
-            timespan: [site.timespan || this._timespanService.constructTimespanArray()]
+            timespan: [site.timespan || '', Validators.required]
         });
     }
 
