@@ -95,13 +95,10 @@ export class SiteService {
     // Create the full size iFrame that will cycle through the
     // site array urls and add it to the body element
     public createIframeForSites(): void {
-        let siteArray = this.getSites();
-
-        let reverseArray = siteArray;
-        reverseArray.siteArray.reverse();
+        let sites = this.getSites();
         let index = 0;
 
-        for (let site of reverseArray.siteArray) {
+        for (let site of sites.siteArray) {
             let iframe = document.createElement('iframe');
 
             let zIndex = (index === 0) ? 1000 : (index * 1000) + 1000;
@@ -155,35 +152,80 @@ export class SiteService {
         }
     }
 
-    // Cycle through the sites in the SitesArray, changing the
-    // url each time
+    // Cycle through the sites in the SitesArray every
+    // second to see if a change between sites needs to
+    // be made
     public cycleThroughSites(): void {
-        let sites = this.getSites();
-        if (sites.siteArray !== null) {
-            let index = 0;
-            // Cycle through sites
-            let timer = setInterval(() => {
-                for (let site in sites.siteArray) {
-                    if (site !== null) {
-                        let iframe = document.getElementById('tabflix-iframe-' + index);
-                        if (iframe !== null) {
-                            let active = iframe.getAttribute('tabflix') === 'active' ? 1 : 0;
-                            if (active) {
-                                // Remove active status
-                                iframe.setAttribute('tabflix', '');
-                                // Set next frame to active
-                                let nextIndex = (index + 1 === sites.siteArray.length) ? 0 : index + 1;
-                                let nextIframe = document.getElementById('tabflix-iframe-' + nextIndex);
-                                nextIframe.setAttribute('tabflix', 'active');
-                                nextIframe.style.zIndex = '2000';
-                                // Set Z-Index of original iFrame
-                                iframe.style.zIndex = '1000';
-                            }
-                        }
-                    }
+        let loopTimer = 1;
+        let arrayLength = this.getSites().siteArray.length;
+
+        let timer = setInterval(() => {
+            // DEBUG to see loop times
+            // console.log('loopTimer: ' + loopTimer);
+
+            // Check which site is active
+            let activeSite = this._getActiveSite();
+
+            // Stop timer if user has exited
+            // iframe screen, and therfore iframes
+            // have been removed
+            if (activeSite === null) {
+                clearTimeout(timer);
+                return;
+            }
+
+            // Check if incremented interval == site.timespan
+            if (Number(activeSite.timespan) === loopTimer) {
+                let siteIndex = this._getIndexOfSite(activeSite);
+                this._setIframeAttributes(siteIndex, arrayLength);
+                loopTimer = 1;
+            } else {
+                loopTimer += 1;
+            }
+        }, 1000);
+    }
+
+    // Get the site that's currently active 
+    private _getActiveSite(): Site {
+        let allSites = this.getSites();
+        for (let i = 0; i < allSites.siteArray.length; i++) {
+            let iframe = document.getElementById('tabflix-iframe-' + i);
+            // If user has closed iframes then they
+            // will not be found
+            if (iframe === null) {
+                return null;
+            } else {
+                let active = iframe.getAttribute('tabflix') === 'active' ? 1 : 0;
+                if (active) {
+                    return allSites.siteArray[i];
                 }
-                ((index + 1) === sites.siteArray.length) ? index = 0 : index++;
-            }, 10000);
+            }
+        }
+    }
+
+    // Get the index value of a given site
+    private _getIndexOfSite(site: Site): number {
+        let allSites = this.getSites();
+        for (let i = 0; i < allSites.siteArray.length; i++) {
+            if (allSites.siteArray[i].url === site.url) {
+                return i;
+            }
+        }
+    }
+
+    // Make necessary changes to iframe 
+    private _setIframeAttributes(index: number, arrayLength: number) {
+        let iframe = document.getElementById('tabflix-iframe-' + index);
+        if (iframe !== null) {
+            // Remove active status of current iframe
+            iframe.setAttribute('tabflix', '');
+            // Set next iframe to active
+            let nextIndex = (index + 1 === arrayLength) ? 0 : index + 1; // Handle end of array
+            let nextIframe = document.getElementById('tabflix-iframe-' + nextIndex);
+            nextIframe.setAttribute('tabflix', 'active');
+            nextIframe.style.zIndex = '2000';
+            // Set Z-Index of original iframe to lower than new one
+            iframe.style.zIndex = '1000';
         }
     }
 
