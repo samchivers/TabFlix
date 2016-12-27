@@ -6,6 +6,9 @@ import { AppConfig } from '../../app.config';
 @Injectable()
 export class TimespanService {
 
+    // Property for the selected timespan
+    public selectedTimespan: Timespan;
+
     // Array object for timespan options
     public TimespanArray = Array<Timespan>();
 
@@ -30,6 +33,9 @@ export class TimespanService {
         for (let i = 1; i <= noOfValues; i++) {
             this.TimespanArray.push(new Timespan(i, minTimeValue * i));
         }
+
+        // Set the first option to be selected by default
+        this.selectedTimespan = this.TimespanArray[0];
 
         return this.TimespanArray;
     }
