@@ -61,7 +61,7 @@ export class SiteService {
         // add it if so
         for (let i = 0; i < this._siteArray.siteArray.length; i++) {
             if (this._siteArray.siteArray[i].url === site.url) {
-                if (this._siteArray.siteArray[i].timespan === site.timespan) {
+                if (this._siteArray.siteArray[i].timespan === site.timespan && this._siteArray.siteArray[i].name === site.name) {
                     this.siteExists$.emit(site);
                     return;
                 } else {
@@ -145,7 +145,8 @@ export class SiteService {
         }
         return this._formBuilder.group({
             url: [site.url || '', Validators.required],
-            timespan: [site.timespan || '', Validators.required]
+            timespan: [site.timespan || '', Validators.required],
+            name: [site.name || '', Validators.required]
         });
     }
 
