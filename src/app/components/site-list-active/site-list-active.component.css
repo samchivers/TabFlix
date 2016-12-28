@@ -11,10 +11,21 @@ h4 {
     color:#ce4844;
 }
 
-.btn-tabflix-red {
-    background-color: #ce4844;
+.btn-tabflix {
     color: #fff;
     padding: 5px 8px 5px 8px;
     margin: 5px auto;
-    border-radius: 2px;
+    border-radius: 2px;    
+}
+
+.btn-tabflix-red {
+    background-color: #ce4844;
+}
+
+.btn-tabflix-blue {
+    background-color: #1b809e;
+}
+
+.btn-tabflix-green {
+    background-color: #3c763d;
 }

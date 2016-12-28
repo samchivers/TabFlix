@@ -18,6 +18,15 @@ export class SiteService {
     // Event emitted when a site is removed
     public siteRemoved$: EventEmitter<Site>;
 
+    // Event emitted when a site is removed
+    public siteUpdated$: EventEmitter<Site>;
+
+    // Event emitted when a site is removed
+    public siteReOrdered$: EventEmitter<Site>;
+
+    // Hydrate a site
+    public siteToHydrate$: EventEmitter<Site>;
+
     // Event emitted when a site that already
     // exists is added
     public siteExists$: EventEmitter<Site>;
@@ -27,7 +36,15 @@ export class SiteService {
         private _localStorageService: LocalStorageService) {
         this.siteAdded$ = new EventEmitter<Site>();
         this.siteRemoved$ = new EventEmitter<Site>();
+        this.siteUpdated$ = new EventEmitter<Site>();
+        this.siteReOrdered$ = new EventEmitter<Site>();
         this.siteExists$ = new EventEmitter<Site>();
+        this.siteToHydrate$ = new EventEmitter<Site>();
+    }
+
+    // Issue hydration event
+    public hydrateSite(site: Site) {
+        this.siteToHydrate$.emit(site);
     }
 
     // Save a new site
@@ -44,8 +61,15 @@ export class SiteService {
         // add it if so
         for (let i = 0; i < this._siteArray.siteArray.length; i++) {
             if (this._siteArray.siteArray[i].url === site.url) {
-                this.siteExists$.emit(site);
-                return;
+                if (this._siteArray.siteArray[i].timespan === site.timespan) {
+                    this.siteExists$.emit(site);
+                    return;
+                } else {
+                    // URL's match but timespan's dont, must be updating
+                    // timespan
+                    this.updateSite(site);
+                    return;
+                }
             }
         }
 
@@ -56,6 +80,21 @@ export class SiteService {
         // to hook into elsewhere
         this._localStorageService.set('siteArray', this._siteArray);
         this.siteAdded$.emit(site);
+    }
+
+    // Update an existing site
+    public updateSite(site: Site) {
+        this._siteArray = this._localStorageService.get('siteArray') as SiteArray;
+        for (let i = 0; i < this._siteArray.siteArray.length; i++) {
+            if (this._siteArray.siteArray[i].url === site.url) {
+                // Remove previous entry and add new one in its place
+                this._siteArray.siteArray.splice(i, 1);
+                this._siteArray.siteArray.splice(i, 0, site);
+                // Save it and emit update event
+                this._localStorageService.set('siteArray', this._siteArray);
+                this.siteUpdated$.emit(site);
+            }
+        }
     }
 
     // Remove a site from LocalStorageService
@@ -70,6 +109,24 @@ export class SiteService {
                 this._localStorageService.set('siteArray', this._siteArray);
                 this.siteRemoved$.emit(site);
             }
+        }
+    }
+
+    // Reorder site list
+    public moveSite(site: Site, direction: string) {
+        let i = this._getIndexOfSite(site);
+        this._siteArray = this.getSites();
+        if (i !== null) {
+            this._siteArray.siteArray.splice(i, 1);
+            if (direction === 'up') {
+                // decrement index by one
+                this._siteArray.siteArray.splice(i - 1, 0, site);
+            } else if (direction === 'down') {
+                // increment index by one
+                this._siteArray.siteArray.splice(i + 1, 0, site);
+            }
+            this._localStorageService.set('siteArray', this._siteArray);
+            this.siteReOrdered$.emit(site);
         }
     }
 
@@ -115,6 +172,8 @@ export class SiteService {
             iframe.style.left = '0';
             iframe.style.width = '100%';
             iframe.style.height = '100%';
+            iframe.style.overflow = 'hidden';
+            iframe.scrolling = 'no';
             if (index === 0) {
                 iframe.setAttribute('tabflix', 'active');
                 // Start the first site out as active, and

@@ -31,6 +31,7 @@ export class SiteComponent implements OnInit {
         this.buildAddSiteForm();
         this.timespanArray = this._timespanService.constructTimespanArray();
         this._siteService.siteExists$.subscribe(site => this._onSiteExists(site));
+        this._siteService.siteToHydrate$.subscribe(site => this._onSiteToHydrate(site));
     }
 
     // Show the user a modal with error message
@@ -48,6 +49,11 @@ export class SiteComponent implements OnInit {
             .open();
     }
 
+    // Hydrate form with specific values
+    private _onSiteToHydrate(site: Site): void {
+        this.form = this._siteService.getSiteFormGroup(site);
+    }
+
     // Add a new site object to local storage
     // via the site service
     public addSite() {
@@ -57,7 +63,6 @@ export class SiteComponent implements OnInit {
     // Build the dynamic form for adding new sites
     public buildAddSiteForm() {
         this.form = this._siteService.getSiteFormGroup();
-        console.log(this.form);
     }
 
 }

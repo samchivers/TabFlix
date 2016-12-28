@@ -1,24 +1,29 @@
 <div class="container site-list-active-container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h4>Active Urls</h4>
-      <p>A list of currently active URLs for TabFlix to cycle through.</p>
-      <table class="table table-striped table-responsive table-bordered">
-        <thead>
-          <tr>
-            <th>Url</th>
-            <th>Time</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let site of siteArray.siteArray">
-            <td>{{ site.url }}</td>
-            <td>{{ site.timespan }} seconds</td>
-            <td><span class="btn-tabflix-red" (click)="removeSite(site)"><i class="fa fa-times"></i></span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>Active Urls</h4>
+            <p>A list of currently active URLs for TabFlix to cycle through.</p>
+            <table class="table table-striped table-responsive table-bordered">
+                <thead>
+                    <tr>
+                        <th>Url</th>
+                        <th>Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let site of siteArray.siteArray; let f = first; let l = last; let i = index;" (click)="hydrateSite(site)">
+                        <td>{{ site.url }}</td>
+                        <td>{{ site.timespan }} seconds</td>
+                        <td>
+                            <span class="btn-tabflix btn-tabflix-blue" (click)="hydrateSite(site)"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                            <span class="btn-tabflix btn-tabflix-red" (click)="removeSite(site)"><i class="fa fa-times" aria-hidden="true"></i></span>
+                            <span *ngIf="!f" class="btn-tabflix btn-tabflix-green" (click)="moveSite(site, 'up')"><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+                            <span *ngIf="!l" class="btn-tabflix btn-tabflix-green" (click)="moveSite(site, 'down')"><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
